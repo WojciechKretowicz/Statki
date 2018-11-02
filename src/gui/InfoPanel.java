@@ -1,5 +1,7 @@
 package gui;
 
+import Engine.General;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -44,12 +46,13 @@ public class InfoPanel extends JPanel {
         repaint();
     }
 
-
     @Override
     public void paint(Graphics g) {
         super.paint(g);
         g.setColor(new Color(255,0,0));
         g.setFont(g.getFont().deriveFont(20.0f));
-        g.drawString(komunikat,screenSize.width/5,screenSize.height/20);
+        g.drawString(komunikat,screenSize.width/5,screenSize.height/22);
+        g.drawString("Pozostałe strzały: " + General.getStrzaly() +
+        " Pozostałe pola statków: " + General.getPolaStatkow(), screenSize.width/6, screenSize.height/15);
     }
 }

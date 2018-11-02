@@ -1,7 +1,7 @@
 package Engine;
 
 public class General {
-    private static int strzaly = 50;
+    private static int strzaly;
     private static int polaStatkow;
 
     public static void subStrzaly() {
@@ -13,8 +13,11 @@ public class General {
     }
 
     public static void setStrzaly(String text) {
-        if(text != "Ile chcesz mieć prób?")
+        if(!text.equals("Ile chcesz mieć prób?"))
             strzaly = Integer.parseInt(text);
+        else
+            strzaly = 40;
+        polaStatkow = 20;
     }
 
     public static void subPolaStatkow() {

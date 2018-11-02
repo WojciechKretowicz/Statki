@@ -2,6 +2,7 @@ package gui.map;
 
 import Engine.General;
 import Engine.Statek;
+import gui.GUI;
 import gui.InfoPanel;
 
 import javax.swing.*;
@@ -14,10 +15,10 @@ public class Tile extends JPanel {
     private boolean clicked;
     private boolean visited;
     private Statek statek;
-    private MapPanel mapPanel;
-    public Tile(int x, int y, Dimension screenSize, InfoPanel info, MapPanel mapPanel) {
+    private GUI gui;
+    public Tile(int x, int y, Dimension screenSize, InfoPanel info, GUI gui) {
         super();
-        this.mapPanel = mapPanel;
+        this.gui = gui;
         this.x = x;
         this.y = y;
         statek = null;
@@ -40,7 +41,7 @@ public class Tile extends JPanel {
                     if(General.getStrzaly() > 0)
                         info.pudlo();
                     else {
-                        info.przegrales();
+                        gui.endGame(false);
                         //////////////////////////////////
                     }
                 }
@@ -55,9 +56,9 @@ public class Tile extends JPanel {
                     }
 
                     if(General.getStrzaly() == 0 && General.getPolaStatkow() > 0)
-                        info.przegrales();
+                        gui.endGame(false);
                     else if(General.getPolaStatkow() == 0)
-                        info.wygrales();
+                        gui.endGame(true);
                 }
             }
 
@@ -102,21 +103,21 @@ public class Tile extends JPanel {
         if(statek != s)
             return;
         if(x > 0 && y > 0)
-            mapPanel.getTiles()[index(x-1,y-1)].mark(s);
+            gui.getMapPanel().getTiles()[index(x-1,y-1)].mark(s);
         if(x < 9 && y < 9)
-            mapPanel.getTiles()[index(x+1,y+1)].mark(s);
+            gui.getMapPanel().getTiles()[index(x+1,y+1)].mark(s);
         if(x > 0 && y < 9)
-            mapPanel.getTiles()[index(x-1,y+1)].mark(s);
+            gui.getMapPanel().getTiles()[index(x-1,y+1)].mark(s);
         if(x < 9 && y > 0)
-            mapPanel.getTiles()[index(x+1,y-1)].mark(s);
+            gui.getMapPanel().getTiles()[index(x+1,y-1)].mark(s);
         if(x > 0)
-            mapPanel.getTiles()[index(x-1,y)].mark(s);
+            gui.getMapPanel().getTiles()[index(x-1,y)].mark(s);
         if(x < 9)
-            mapPanel.getTiles()[index(x+1,y)].mark(s);
+            gui.getMapPanel().getTiles()[index(x+1,y)].mark(s);
         if(y > 0)
-            mapPanel.getTiles()[index(x,y-1)].mark(s);
+            gui.getMapPanel().getTiles()[index(x,y-1)].mark(s);
         if(y < 9)
-            mapPanel.getTiles()[index(x,y+1)].mark(s);
+            gui.getMapPanel().getTiles()[index(x,y+1)].mark(s);
     }
 
     public Statek getStatek() {

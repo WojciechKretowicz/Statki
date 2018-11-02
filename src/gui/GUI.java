@@ -17,6 +17,7 @@ public class GUI {
     private JTextField proby;
     private MapPanel mapPanel;
     private InfoPanel info;
+    private FinalPanel finalPanel;
 
     public GUI() {
         screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -53,10 +54,14 @@ public class GUI {
 
         info = new InfoPanel(screenSize);
 
-        mapPanel = new MapPanel(screenSize, info);
+        mapPanel = new MapPanel(screenSize, info, this);
         backgroundPanel.add(mapPanel);
 
         backgroundPanel.add(info);
+
+        finalPanel = new FinalPanel(screenSize);
+
+        backgroundPanel.add(finalPanel);
 
         frame.add(backgroundPanel);
     }
@@ -72,6 +77,16 @@ public class GUI {
         menuPanel.setVisible(false);
         mapPanel.setVisible(true);
         info.setVisible(true);
+    }
+
+    public void endGame(boolean win) {
+        mapPanel.setVisible(false);
+        info.setVisible(false);
+        if(win)
+            finalPanel.wygrales();
+        else
+            finalPanel.przegrales();
+        finalPanel.setVisible(true);
     }
 
     public MapPanel getMapPanel() {

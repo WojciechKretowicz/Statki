@@ -1,5 +1,6 @@
 package gui.map;
 
+import gui.GUI;
 import gui.InfoPanel;
 
 import javax.swing.*;
@@ -7,7 +8,7 @@ import java.awt.*;
 
 public class MapPanel extends JPanel {
     private Tile tiles [];
-    public MapPanel(Dimension screenSize, InfoPanel info) {
+    public MapPanel(Dimension screenSize, InfoPanel info, GUI gui) {
         super();
         tiles = new Tile[100];
         setMaximumSize(new Dimension(screenSize.width/2, screenSize.width/2));
@@ -15,7 +16,7 @@ public class MapPanel extends JPanel {
         setVisible(false);
 
         for(int i = 0; i<100; i++) {
-            Tile tile = new Tile(i%10,i/10, screenSize, info, this);
+            Tile tile = new Tile(i%10,i/10, screenSize, info, gui);
             add(tile);
             tiles[i] = tile;
         }
